@@ -6,9 +6,11 @@
         <entry key="app/src/main/res/drawable-v24/button_gradient.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_about_us.xml" value="0.15579710144927536" />
         <entry key="app/src/main/res/layout/activity_address.xml" value="0.15579710144927536" />
+        <entry key="app/src/main/res/layout/activity_collection_zones.xml" value="0.15579710144927536" />
         <entry key="app/src/main/res/layout/activity_contact_us.xml" value="0.15579710144927536" />
         <entry key="app/src/main/res/layout/activity_donate.xml" value="0.15579710144927536" />
         <entry key="app/src/main/res/layout/activity_emap.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_forgot_password.xml" value="0.15579710144927536" />
         <entry key="app/src/main/res/layout/activity_help.xml" value="0.15579710144927536" />
         <entry key="app/src/main/res/layout/activity_history.xml" value="0.15579710144927536" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.15579710144927536" />

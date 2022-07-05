@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@drawable/back"
     tools:context=".AboutUsActivity">
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,14 +21,15 @@
             android:textColor="@color/white"
             android:layout_margin="20dp"/>
 
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="18dp"
-            android:layout_marginBottom="28dp"
-            android:src="@drawable/splash"
-            tools:ignore="ContentDescription" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image"
+            android:layout_gravity="center"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/mainlogo"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#FF000000"/>
 
 
         <TextView
@@ -47,7 +48,7 @@
             android:layout_height="60dp"
             android:layout_margin="10dp"
             android:clickable="true"
-            app:cardBackgroundColor="@color/gray"
+            app:cardBackgroundColor="@color/green"
             app:cardCornerRadius="12dp"
             app:cardElevation="5dp"
             tools:ignore="KeyboardInaccessibleWidget">
@@ -78,7 +79,7 @@
             android:layout_height="60dp"
             android:layout_margin="10dp"
             android:clickable="true"
-            app:cardBackgroundColor="@color/gray"
+            app:cardBackgroundColor="@color/green"
             app:cardCornerRadius="12dp"
             app:cardElevation="5dp"
             tools:ignore="KeyboardInaccessibleWidget">
@@ -110,7 +111,7 @@
             android:layout_height="60dp"
             android:layout_margin="10dp"
             android:clickable="true"
-            app:cardBackgroundColor="@color/gray"
+            app:cardBackgroundColor="@color/green"
             app:cardCornerRadius="12dp"
             app:cardElevation="5dp"
             tools:ignore="KeyboardInaccessibleWidget">

@@ -5,21 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
-    tools:context=".History">
+    android:background="@drawable/back"
+    tools:context=".HistoryActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:ignore="ScrollViewSize">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/history"
-            android:fontFamily="@font/opensans"
-            android:textSize="26sp"
-            android:textColor="@color/white"
-            android:layout_margin="20dp"/>
 
         <LinearLayout
             android:id="@+id/showdata"
@@ -32,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:clickable="true"
-                app:cardBackgroundColor="@color/gray"
+                app:cardBackgroundColor="@color/green"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="5dp"
                 tools:ignore="KeyboardInaccessibleWidget">
