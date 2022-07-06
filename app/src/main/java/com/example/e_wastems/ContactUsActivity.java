@@ -2,11 +2,13 @@ package com.example.e_wastems;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,6 +37,7 @@ public class ContactUsActivity extends AppCompatActivity {
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     String userID;
+    Toolbar toolbar;
     public static final String TAG = "TAG";
     TextInputLayout nameError, emailError, messageError;
     @Override
@@ -48,7 +51,10 @@ public class ContactUsActivity extends AppCompatActivity {
         nameError = (TextInputLayout) findViewById(R.id.nameError);
         emailError = (TextInputLayout) findViewById(R.id.emailError);
         messageError = (TextInputLayout) findViewById(R.id.messageError);
-
+        toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Contact-Us");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         fAuth=FirebaseAuth.getInstance();
         fStore= FirebaseFirestore.getInstance();
 
@@ -58,6 +64,18 @@ public class ContactUsActivity extends AppCompatActivity {
                 SetValidation();
             }
         });
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
     public void SetValidation() {
 

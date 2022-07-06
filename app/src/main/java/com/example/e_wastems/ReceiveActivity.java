@@ -3,6 +3,7 @@ package com.example.e_wastems;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
@@ -12,6 +13,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,6 +47,7 @@ import java.util.Map;
 public class ReceiveActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
 
     private GoogleMap mMap;
+    Toolbar toolbar;
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
     LocationRequest mLocationRequest;
@@ -64,7 +67,10 @@ public class ReceiveActivity extends AppCompatActivity implements OnMapReadyCall
         mFullName = findViewById(R.id.receivername);
         mDescription = findViewById(R.id.description);
         mSubmitBtn=findViewById(R.id.submit);
-
+        toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Receive");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         fAuth=FirebaseAuth.getInstance();
         fStore= FirebaseFirestore.getInstance();
 
@@ -192,12 +198,26 @@ public class ReceiveActivity extends AppCompatActivity implements OnMapReadyCall
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
-        if (requestCode == REQUEST_CODE){
-            if(grantResults.length > 0 && grantResults[0]  == PackageManager.PERMISSION_GRANTED){
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 mapFragment.getMapAsync(this);
-            }else{
-                Toast.makeText(this,"Permission Denied", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
             }
         }
     }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
 }

@@ -1,19 +1,18 @@
 package com.example.e_wastems;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.e_wastems.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
@@ -24,28 +23,18 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
-
-import static android.util.Base64.CRLF;
-
-public class EMapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,  com.google.android.gms.location.LocationListener {
-
+public class EMapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,  com.google.android.gms.location.LocationListener{
     private GoogleMap mMap;
+    private Toolbar toolbar;
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
     LocationRequest mLocationRequest;
@@ -59,7 +48,11 @@ public class EMapActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emap);
-
+        toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Collection Offices");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mapFragment.getMapAsync(this);
@@ -68,6 +61,7 @@ public class EMapActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
     }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -92,15 +86,23 @@ public class EMapActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onLocationChanged(@NonNull Location location) {
         mLastLocation = location;
         showLocation();
-        LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+        //LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
 
-        MarkerOptions markerOptions1 = new MarkerOptions().position(latLng).title("You are here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        //mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-        //mMap.addMarker(markerOptions1).showInfoWindow();
+//        MarkerOptions markerOptions1 = new MarkerOptions().position(latLng).title("You are here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+//        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+//        mMap.addMarker(markerOptions1).showInfoWindow();
+//
+//        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
+//        mMap.addMarker(markerOptions1).showInfoWindow();
 
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
-        mMap.addMarker(markerOptions1).showInfoWindow();
+        LatLngBounds australiaBounds = new LatLngBounds(
+                new LatLng(-2, 33.8), // SW bounds
+                new LatLng(2, 41.9)  // NE bounds
+        );
+        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(australiaBounds, 0));
+
+
     }
 
     public void showLocation() {
@@ -157,19 +159,34 @@ public class EMapActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                mapFragment.getMapAsync(this);
+            } else {
+                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
-
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_CODE){
-            if(grantResults.length > 0 && grantResults[0]  == PackageManager.PERMISSION_GRANTED){
-                mapFragment.getMapAsync(this);
-            }else{
-                Toast.makeText(this,"Permission Denied", Toast.LENGTH_SHORT).show();
-            }
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
+
     }
+
 }

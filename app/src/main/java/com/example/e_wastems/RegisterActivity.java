@@ -24,10 +24,10 @@ import com.google.firebase.auth.FirebaseAuth;
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText inputEmail, inputPassword;
-    private Button btnSignIn, btnSignUp;
+    private Button  btnSignUp;
     private ProgressBar progressBar;
     private FirebaseAuth auth;
-    private TextView btnResetPassword;
+    private TextView btnResetPassword,btnSignIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
 
-        btnSignIn = (Button) findViewById(R.id.login);
+        btnSignIn =  findViewById(R.id.login);
         btnSignUp =  findViewById(R.id.register);
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
@@ -92,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     Toast.makeText(RegisterActivity.this, "Authentication failed." + task.getException(),
                                             Toast.LENGTH_SHORT).show();
                                 } else {
-                                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                                     finish();
                                 }
                             }

@@ -1,34 +1,26 @@
 package com.example.e_wastems;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.LinearLayout;
+import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.example.e_wastems.R;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class HistoryActivity extends AppCompatActivity {
-
+    Toolbar toolbar;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference notebookref = db.collection("user data");
     public static final String TAG = "TAG";
@@ -41,7 +33,10 @@ public class HistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_history);
         fAuth= FirebaseAuth.getInstance();
         textViewData=findViewById(R.id.data);
-
+        toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("My Donation History");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         loadNotes();
     }
 
@@ -79,5 +74,17 @@ public class HistoryActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 }

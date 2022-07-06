@@ -1,11 +1,14 @@
 package com.example.e_wastems;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.e_wastems.R;
@@ -14,7 +17,7 @@ import com.example.e_wastems.R;
 public class AboutUsActivity extends AppCompatActivity {
 
     CardView instagram,facebook,twitter;
-
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +26,10 @@ public class AboutUsActivity extends AppCompatActivity {
         instagram = findViewById(R.id.instagram);
         facebook = findViewById(R.id.facebook);
         twitter = findViewById(R.id.twitter);
-
+        toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("About-Us");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         instagram.setOnClickListener(new View.OnClickListener ()
         {
             @Override
@@ -51,6 +57,18 @@ public class AboutUsActivity extends AppCompatActivity {
                 startActivity(myWebLink);
             }
         });
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 
 }
