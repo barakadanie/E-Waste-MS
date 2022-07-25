@@ -11,6 +11,7 @@
         <entry key="app/src/main/res/drawable/bg_splash_gradient.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_about_us.xml" value="0.15579710144927536" />
         <entry key="app/src/main/res/layout/activity_address.xml" value="0.15579710144927536" />
+        <entry key="app/src/main/res/layout/activity_admin.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/activity_collection_zones.xml" value="0.15579710144927536" />
         <entry key="app/src/main/res/layout/activity_contact_us.xml" value="0.15579710144927536" />
         <entry key="app/src/main/res/layout/activity_donate.xml" value="0.15579710144927536" />
@@ -26,11 +27,13 @@
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.15579710144927536" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.15579710144927536" />
         <entry key="app/src/main/res/layout/activity_user_data.xml" value="0.15579710144927536" />
+        <entry key="app/src/main/res/layout/activity_verify_otp.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/child_list.xml" value="0.15579710144927536" />
         <entry key="app/src/main/res/layout/header.xml" value="0.15579710144927536" />
         <entry key="app/src/main/res/layout/list_item.xml" value="0.15579710144927536" />
         <entry key="app/src/main/res/layout/singlerow.xml" value="0.15579710144927536" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.19375" />
         <entry key="app/src/main/res/menu/drawer.xml" value="0.19375" />
       </map>
     </option>

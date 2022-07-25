@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/homes"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/zones"
+        android:icon="@drawable/dashboard"
+        android:title="@string/collection" />
+
+    <item
+        android:id="@+id/massage"
+        android:icon="@drawable/message"
+        android:title="@string/usermessages" />
+    <item
+        android:id="@+id/usres"
+        android:icon="@drawable/users"
+        android:title="@string/users" />
+</menu>
